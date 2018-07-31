@@ -10,9 +10,11 @@ class App extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    console.log(event.target)
     const data = new FormData(event.target);
+    console.log(JSON.stringify(data))
     
-    fetch('http://127.0.0.1:5000/findcommonletters', {
+    fetch('http://127.0.0.1:5000/', {
       method: 'POST',
       body: data,
       headers: {
