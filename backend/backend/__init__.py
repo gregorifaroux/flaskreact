@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
+from json import *
 from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
@@ -7,9 +8,12 @@ import backend.utils as myutils
 
 
 
-@app.route('/')
-def home() -> 'html':
-	return render_template('entry.html', page_title='Play with Functions')
+@app.route('/', methods=['GET', 'POST'])
+def home() -> 'json':
+  jsonResp = {'message' : 'API is working!'}
+  jsonResp['message'] = request.form.get('sentence')
+  print(jsonify(jsonResp))
+  return jsonify(jsonResp)
 
 @app.route('/findcommonletters', methods=['POST'])
 def findcommonletters() -> 'html':

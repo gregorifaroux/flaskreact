@@ -6,7 +6,14 @@ class SimpleForm extends React.Component{
       return (
         <div>
           <h1>Test</h1>
-          <form></form>
+          <form className="form">
+    <div className="field">
+      <div className="control">
+        <label className="label">First Name</label>
+        <Field className="input" name="firstName" component="input" type="text" placeholder="First Name"/>
+      </div>
+    </div>
+    </form>
         </div>
     ) 
    }
