@@ -17,9 +17,14 @@ def home() -> 'json':
 
 @app.route('/findcommonletters', methods=['POST'])
 def findcommonletters() -> 'html':
-#  results = myutils.find_common_letters(request.form['sentence'], request.form['letters'])
-#  return render_template('results.html', results_title='Common Letters:', the_results = results)
-	return '{ "name":"Fake data" }'
+  print('**** FIND COMMON LETTERS ********')
+  content = request.get_json()
+  print(content)
+  results = myutils.find_common_letters(content['sentence'], content['letters'])
+  print('results: ' + str(results))
+  return '{ "letters":"' + results + '"}'
+  #return render_template('results.html', results_title='Common Letters:', the_results = results)
+  #return '{ "name":"Fake data" }'
 
 @app.route('/countvowels', methods=['POST'])
 def countvowels() -> 'html':

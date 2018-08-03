@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import SimpleForm from './SimpleForm/';
 import './App.css';
 
@@ -30,7 +31,28 @@ class App extends Component {
     });
   }
 
-  
+  submit = values => {
+    // print the form values to the console
+    console.log(values);
+
+    fetch('http://127.0.0.1:5000/findcommonletters', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(values)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Results ' + JSON.stringify(data))
+        this.setState({
+          res: JSON.stringify(data)
+        })
+      }
+    ).catch(err => {
+      console.error('Error: ', err)
+    });
+  }
 
   render() {
     const { res } = this.state;
@@ -40,40 +62,14 @@ class App extends Component {
         <div className="App-intro">
           <div className="container">
             <p className="App-intro">
-              Contact Form
             </p>
-            <SimpleForm />
+            <SimpleForm onSubmit={this.submit} />
           </div>
-          <form onSubmit={this.handleSubmit} name="webapp" className="pure-form pure-form-aligned">
-
-            <fieldset>
-              <div className="pure-control-group">
-                  <label htmlFor="sentence">Sentence:</label>
-                  <input id="sentence" name="sentence" type="text" size="40"  placeholder="A sentence" required></input>
-              </div>
-              <div className="pure-control-group">
-                  <label htmlFor="letters">Letters:</label>
-                  <input id="letters" name="letters" type="text" size="10"  placeholder="Enter letters" required></input>
-              </div>
-
-              <div className="pure-control-group">
-                <button className="pure-button">
-                    Common letters
-                </button>
-                <button className="pure-button">
-                  Count vowels
-                </button>
-              </div>
-            </fieldset>
-
-
-
-      </form>        
       </div>
       <div className="res-block">
           	<div>
               <h3>Results:</h3>
-              <pre>FormData {res}</pre>
+              <pre>{res}</pre>
           	</div>
         </div>
       </div>

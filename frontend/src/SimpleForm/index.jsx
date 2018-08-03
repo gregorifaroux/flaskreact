@@ -1,22 +1,30 @@
-import React, { Component, ReactDOM, mountNode} from 'react';
-import { Field } from 'redux-forms';
+import React from 'react'
+import { Field, reduxForm } from 'redux-form'
 
-class SimpleForm extends React.Component{  
-  render(){
-      return (
-        <div>
-          <h1>Test</h1>
-          <form className="form">
-    <div className="field">
-      <div className="control">
-        <label className="label">First Name</label>
-        <Field className="input" name="firstName" component="input" type="text" placeholder="First Name"/>
-      </div>
-    </div>
-    </form>
+let SimpleForm = props => {
+  const { handleSubmit } = props
+
+  return (
+    <form onSubmit={handleSubmit} className="pure-form pure-form-aligned">
+      <fieldset>
+        <div className="pure-control-group">
+          <label htmlFor="sentence">Sentence: </label>
+          <Field name="sentence" component="input" type="text" />
         </div>
-    ) 
-   }
+        <div className="pure-control-group">
+          <label htmlFor="letters">Letters: </label>
+         <Field name="letters" component="input" type="text" />
+       </div>
+       <button type="submit" className="pure-button">Common Letters</button>
+      </fieldset>
+    </form>
+  )
 }
 
-export default SimpleForm;
+
+SimpleForm = reduxForm({
+  // a unique name for the form
+  form: 'contact'
+})(SimpleForm)
+
+export default SimpleForm
