@@ -7,28 +7,6 @@ class App extends Component {
   constructor() {
     super();
     this.state = {};
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    console.log(event.target)
-    const data = new FormData(event.target);
-    console.log(JSON.stringify(data))
-    
-    fetch('http://127.0.0.1:5000/', {
-      method: 'POST',
-      body: data,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-      },
-    })
-    .then(response => response.json())
-    .then(data =>  this.setState({
-      res: JSON.stringify(data)
-    })).catch(err => {
-      console.error('Error: ', err)
-    });
   }
 
   submit = values => {
