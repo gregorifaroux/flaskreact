@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import SimpleForm from './SimpleForm/';
 import './App.css';
 
 class App extends Component {
@@ -35,6 +36,12 @@ class App extends Component {
       <div className="App">
         <h1 className="content-subhead">API Call Example</h1>
         <div className="App-intro">
+          <div className="container">
+            <p className="App-intro">
+              Contact Form
+            </p>
+            <SimpleForm />
+          </div>
           <form onSubmit={this.handleSubmit} name="webapp" className="pure-form pure-form-aligned">
 
             <fieldset>
