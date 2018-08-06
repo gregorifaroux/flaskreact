@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
-import SimpleForm from './SimpleForm/';
 import './App.css';
+
+import SimpleForm from './SimpleForm/';
+import URLForm from './SimpleForm/url';
 
 class App extends Component {
   constructor() {
@@ -32,6 +34,27 @@ class App extends Component {
     });
   }
 
+  urlparse = values => {
+    console.log(values);
+    fetch('http://127.0.0.1:5000/soup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(values)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Results ' + JSON.stringify(data))
+        this.setState({
+          res: JSON.stringify(data)
+        })
+      }
+    ).catch(err => {
+      console.error('Error: ', err)
+    });
+  }
+  
   render() {
     const { res } = this.state;
     return (
@@ -42,6 +65,7 @@ class App extends Component {
             <p className="App-intro">
             </p>
             <SimpleForm onSubmit={this.submit} />
+            <URLForm onSubmit={this.urlparse} />
           </div>
       </div>
       <div className="res-block">

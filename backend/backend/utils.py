@@ -1,3 +1,5 @@
+from bs4 import BeautifulSoup
+import requests
 
 def count_vowels(sentence: str) -> dict:
     """Return list of vowels found in sentence"""
@@ -16,3 +18,11 @@ def count_vowels(sentence: str) -> dict:
 def find_common_letters(sentence: str, letters: str='python') -> set:
     """Return set of characters common to both arguments"""
     return str(sorted(set(sentence).intersection(set(letters))))
+
+def beautiful_soup(url: str='news.google.com') -> set:
+    """screen-scraping"""
+    r = requests.get("http://" + url)
+    data = r.text
+    soup = BeautifulSoup(data, 'html.parser')
+        
+    return str(soup.get_text())

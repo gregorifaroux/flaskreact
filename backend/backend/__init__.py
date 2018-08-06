@@ -31,4 +31,9 @@ def countvowels() -> 'html':
   results = myutils.count_vowels(request.form['sentence'])
   return render_template('results.html', results_title='Vowels Count:', the_results = results)
 
+@app.route('/soup', methods=['POST'])
+def soup() -> 'json':
+  jsonResp = {'result' : myutils.beautiful_soup()}
+  return jsonify(jsonResp)
+
 app.run()
